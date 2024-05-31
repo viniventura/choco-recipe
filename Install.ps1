@@ -11,11 +11,11 @@ choco feature enable -n=allowGlobalConfirmation;
 ,"dotnet-6.0-sdk"
 ,"dotnet-8.0-sdk"
 ,"chrome"
+,"mpc-hc"
 ,"microsoft-windows-terminal"
 ,"vscode"
 ,"sql-server-management-studio"
 ,"nodejs-lts"
-,"soapui"
 ,"postman"
 ,"notepadplusplus") + ($pins = @("vscode")) | % { choco install $_ };
 
