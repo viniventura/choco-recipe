@@ -1,22 +1,25 @@
-<# chocolatey setup #> 
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); 
-​
-<# allowing globally confirmation #> 
-choco feature enable -n=allowGlobalConfirmation;
+<# Chocolatey Setup #> 
+Set-ExecutionPolicy Bypass -Scope Process -Force
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-<# programs to install #>
-@(
-"git"
-,"avastfreeantivirus"
-,"dotnet-6.0-sdk"
-,"dotnet-8.0-sdk"
-,"chrome"
-,"mpc-hc"
-,"microsoft-windows-terminal"
-,"vscode"
-,"sql-server-management-studio"
-,"nodejs-lts"
-,"postman"
-,"notepadplusplus") + ($pins = @("vscode")) | % { choco install $_ };
+<# Enable global confirmations to skip -y flags #> 
+choco feature enable -n=allowGlobalConfirmation
 
-<# avoiding future upgrades of these following programs. #> $pins | % { choco pin add -n="$_" }; 
+<# Lista de programas a instalar #>
+$packages = @(
+    "git"
+    "dotnet-8.0-sdk"
+    "googlechrome"
+    "mpc-hc"
+    "microsoft-windows-terminal"
+    "vscode"
+    "sql-server-management-studio"
+    "nodejs-lts"
+    "postman"
+    "wsl2"
+    "notepadplusplus"
+    "docker-desktop"
+)
+
+<# Instala os pacotes #>
+$packages | ForEach-Object { choco install $_ }
